@@ -239,6 +239,53 @@ int verifierDateValide(const char *date) {
     }
     return 1;
 }
+void nettoyerBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void menu() {
+    int choix;
+    do {
+        printf("\n=== Système de réservation de vols ===\n");
+        printf("1. Ajouter un vol\n");
+        printf("2. Réserver un siège\n");
+        printf("3. Annuler une réservation\n");
+        printf("4. Afficher les vols\n");
+        printf("5. Modifier un vol\n");
+        printf("6. Rechercher un vol\n");
+        printf("7. Quitter\n");
+        printf("Votre choix: ");
+        scanf("%d", &choix);
+        nettoyerBuffer();
+
+        switch (choix) {
+            case 1:
+                ajouterVol();
+                break;
+            case 2:
+                reserverSiege();
+                break;
+            case 3:
+                annulerReservation();
+                break;
+            case 4:
+                afficherVols();
+                break;
+            case 5:
+                modifierVol();
+                break;
+            case 6:
+                rechercherVol();
+                break;
+            case 7:
+                printf("Au revoir!\n");
+                break;
+            default:
+                printf("Choix invalide, veuillez réessayer.\n");
+        }
+    } while (choix != 7);
+}
 
 
 
