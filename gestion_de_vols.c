@@ -157,5 +157,50 @@ void afficherVols() {
                vols[i].seatsRemaining, vols[i].seatsTotal);
     }
 }
+void modifierVol() {
+    char code[10];
+    printf("Code du vol à modifier: ");
+    scanf("%9s", code);
+    nettoyerBuffer();
+
+    for (int i = 0; i < nombreDeVols; i++) {
+        if (strcmp(vols[i].code, code) == 0) {
+            printf("Nouvelle destination (laisser vide pour ne pas modifier): ");
+            char nouvelleDestination[50];
+            fgets(nouvelleDestination, 50, stdin);
+            strtok(nouvelleDestination, "\n");
+
+            if (strlen(nouvelleDestination) > 0) {
+                strcpy(vols[i].destination, nouvelleDestination);
+            }
+
+            printf("Nouvelle date (JJ/MM/AAAA, laisser vide pour ne pas modifier): ");
+            char nouvelleDate[11];
+            fgets(nouvelleDate, 11, stdin);
+            strtok(nouvelleDate, "\n");
+
+            if (strlen(nouvelleDate) > 0 && verifierDateValide(nouvelleDate)) {
+                strcpy(vols[i].date, nouvelleDate);
+            }
+
+            printf("Nouveau nombre total de sièges (laisser à 0 pour ne pas modifier): ");
+            int nouveauSeatsTotal;
+            scanf("%d", &nouveauSeatsTotal);
+            nettoyerBuffer();
+
+            if (nouveauSeatsTotal > 0 && nouveauSeatsTotal >= vols[i].seatsRemaining) {
+                vols[i].seatsTotal = nouveauSeatsTotal;
+            } else if (nouveauSeatsTotal < vols[i].seatsRemaining) {
+                printf("Erreur: Le nombre total de sièges ne peut pas être inférieur aux sièges restants.\n");
+            }
+
+            printf("Modification effectuée avec succès!\n");
+            return;
+        }
+    }
+
+    printf("Vol introuvable.\n");
+}
+
 
 
