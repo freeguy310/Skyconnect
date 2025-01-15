@@ -1,0 +1,32 @@
+# Fichiers spécifiques à Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Fichiers binaires compilés
+*.exe
+*.obj
+*.o
+*.out
+
+# Fichiers temporaires et logs
+*.log
+*.tmp
+*.temp
+*~
+*.swp
+Thumbs.db
+.DS_Store
+
+# Répertoires de build ou compilations
+/build/
+/dist/
+
+# Système de gestion de version des IDE
+.idea/
+
+# Fichiers de configuration utilisateur (non partagés)
+*.user
+*.db
+
+# Fichier de sauvegarde des vols (dépend de l'utilisateur
+*.txt
