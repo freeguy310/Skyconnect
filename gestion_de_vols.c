@@ -201,6 +201,44 @@ void modifierVol() {
 
     printf("Vol introuvable.\n");
 }
+void rechercherVol() {
+    char destination[50];
+    printf("Entrer la destination pour rechercher des vols : ");
+    fgets(destination, 50, stdin);
+    strtok(destination, "\n");
+
+    int trouve = 0;
+    for (int i = 0; i < nombreDeVols; i++) {
+        if (strcasecmp(vols[i].destination, destination) == 0) {
+            printf("Code: %s, Destination: %s, Date: %s, Sièges restants: %d/%d\n",
+                   vols[i].code, vols[i].destination, vols[i].date,
+                   vols[i].seatsRemaining, vols[i].seatsTotal);
+            trouve = 1;
+        }
+    }
+    if (!trouve) {
+        printf("Aucun vol trouvé pour cette destination.\n");
+    }
+}
+
+int verifierCodeUnique(const char *code) {
+    for (int i = 0; i < nombreDeVols; i++) {
+        if (strcmp(vols[i].code, code) == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int verifierDateValide(const char *date) {
+    if (strlen(date) != 10) return 0;
+    if (!isdigit(date[0]) || !isdigit(date[1]) || date[2] != '/' ||
+        !isdigit(date[3]) || !isdigit(date[4]) || date[5] != '/' ||
+        !isdigit(date[6]) || !isdigit(date[7]) || !isdigit(date[8]) || !isdigit(date[9])) {
+        return 0;
+    }
+    return 1;
+}
 
 
 
