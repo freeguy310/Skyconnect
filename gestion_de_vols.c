@@ -124,5 +124,38 @@ void reserverSiege() {
 
     printf("Vol introuvable.\n");
 }
+void annulerReservation() {
+    char code[10];
+    printf("Code du vol: ");
+    scanf("%9s", code);
+
+    for (int i = 0; i < nombreDeVols; i++) {
+        if (strcmp(vols[i].code, code) == 0) {
+            if (vols[i].seatsRemaining < vols[i].seatsTotal) {
+                vols[i].seatsRemaining++;
+                printf("Réservation annulée avec succès!\n");
+            } else {
+                printf("Toutes les places sont déjà disponibles.\n");
+            }
+            return;
+        }
+    }
+
+    printf("Vol introuvable.\n");
+}
+
+void afficherVols() {
+    if (nombreDeVols == 0) {
+        printf("Aucun vol disponible.\n");
+        return;
+    }
+
+    printf("\nListe des vols:\n");
+  for (int i = 0; i < nombreDeVols; i++) {
+        printf("Code: %s, Destination: %s, Date: %s, Sièges restants: %d/%d\n",
+               vols[i].code, vols[i].destination, vols[i].date,
+               vols[i].seatsRemaining, vols[i].seatsTotal);
+    }
+}
 
 
