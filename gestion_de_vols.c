@@ -37,3 +37,28 @@ int main() {
     sauvegarderDonnees();
     return 0;
 }
+void chargerDonnees() {
+    FILE *fichier = fopen(FILE_NAME, "r");
+    if (fichier == NULL) return;
+
+    while (fscanf(fichier, "%s %s %s %d %d", vols[nombreDeVols].code, vols[nombreDeVols].destination,
+                  vols[nombreDeVols].date, &vols[nombreDeVols].seatsTotal, &vols[nombreDeVols].seatsRemaining) == 5) {
+        nombreDeVols++;
+    }
+
+    fclose(fichier);
+}
+
+void sauvegarderDonnees() {
+    FILE *fichier = fopen(FILE_NAME, "w");
+    if (fichier == NULL) {
+        printf("Erreur: Impossible de sauvegarder les données.\n");
+        return;
+    }
+
+    for (int i = 0; i < nombreDeVols; i++) {
+        fprintf(fichier, "%s %s %s %d %d\n", vols[i].code, vols[i].destination, vols[i].date, vols[i].seatsTotal, vols[i].seatsRemaining);
+    }
+
+    fclose(fichier);
+}
